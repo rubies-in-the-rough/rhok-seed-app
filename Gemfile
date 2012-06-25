@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.6'
 
-gem 'sqlite3'
 gem 'devise'
 gem 'heroku'
 
@@ -17,6 +16,7 @@ end
 gem 'jquery-rails'
 
 group :test, :development do
+  gem 'sqlite3'
   gem 'rspec-rails'
   gem 'factory_girl_rails', '1.2.0'
   gem 'powder'
