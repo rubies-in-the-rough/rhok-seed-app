@@ -22,4 +22,6 @@ group :test, :development do
   gem 'powder'
 end
 
-
+group :production do
+  gem 'pg'
+end
