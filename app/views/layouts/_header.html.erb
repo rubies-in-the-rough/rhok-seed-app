@@ -25,10 +25,15 @@
 
         <% else %>
          <ul class="nav pull-right">
-            <li class="logout">
 
+            <li class="logout">
               <%= link_to "Login", new_user_session_path%>
             </li>
+
+            <li class="logout">
+              <%= link_to "Register", new_user_registration_path%>
+            </li>
+
           </ul>
         <% end %>
 
