@@ -6,4 +6,37 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create!(email: 'example@example.com', password: 'example', password_confirmation: 'example')
+
+users = [
+ 
+  #example user
+  {
+    :email => 'example@example.com',
+    :password => 'example',
+    :password_confirmation => 'example',
+  },
+ 
+  #example admin
+  {
+    :email => 'admin@example.com',
+    :password => 'example',
+    :password_confirmation => 'example',
+    :admin => true
+  }
+ 
+]
+ 
+users.each do |hash|
+  begin
+    olduser = User.find_by_email(hash[:email]) 
+    olduser.destroy if olduser
+
+    newuser = User.new
+    hash.each do |attribute, value|
+      newuser.update_attribute(attribute, value)
+    end
+  rescue Exception => e
+    puts e.message
+    puts e.class
+  end
+end
