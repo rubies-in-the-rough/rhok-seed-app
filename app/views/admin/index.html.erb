@@ -14,6 +14,7 @@
       <td><%= locked_user.email %></td>
       <td><%= locked_user.failed_attempts %></td>
       <td><%= locked_user.locked_at %></td>
+      <td><%= button_to "Unlock", admin_unlock_url %>
     </tr>
   <% end %>
 

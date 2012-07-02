@@ -2,7 +2,10 @@ Rhok::Application.routes.draw do
   devise_for :users
   root :to => "static#home"
   
+  #I know, I know, I'm doign it wrong
   match 'admin/index' => 'admin#index', :as => :admin
+  match 'admin/unlock' => 'admin#unlock_user', :as => :admin_unlock
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
