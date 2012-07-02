@@ -22,8 +22,16 @@ users = [
     :password => 'example',
     :password_confirmation => 'example',
     :admin => true
-  }
+  },
  
+  #example locked user
+  {
+    :email => 'locked@example.com',
+    :password => 'example',
+    :password_confirmation => 'example',
+    :locked_at => "#{Time.now}",
+    :failed_attempts => 4
+  }
 ]
  
 users.each do |hash|
