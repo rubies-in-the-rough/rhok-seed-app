@@ -1,0 +1,32 @@
+<h2>Locked Users</h2>
+<table>
+
+  <strong>
+    <tr>
+      <td>User</td>
+      <td>Failed Login Attempts</td>
+      <td>Time of Lock</td>
+    </tr>
+  </strong>
+
+  <% @locked_users.each do |locked_user| %>
+    <tr>
+      <td><%= locked_user.email %></td>
+      <td><%= locked_user.failed_attempts %></td>
+      <td><%= locked_user.locked_at %></td>
+    </tr>
+  <% end %>
+
+</table>
+  
+<h2>Pending Seed Approvals</h2>
+<table>
+
+  <strong>
+    <tr>
+      <td>Seed</td>
+    </tr>
+  </strong>
+
+</table>
+  

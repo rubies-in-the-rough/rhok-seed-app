@@ -15,7 +15,7 @@
           <li><%= link_to "Link2", "/path2"  %></li>
           <li><%= link_to "Link3", "/path3"  %></li>
           <% if current_user.admin? %>
-            <li><%= link_to "Site Administration", "/admin"  %></li>
+            <li><%= link_to "Site Administration", admin_url  %></li>
           <% end %>
         </ul>
           
