@@ -18,7 +18,9 @@
           
         <ul class="nav pull-right">
           <li class="logout">
-
+            <%= link_to "My Account", edit_user_registration_path%>
+          </li>
+          <li class="logout">
             <%= link_to "Logout", destroy_user_session_url, method: :delete%>
           </li>
         </ul>
