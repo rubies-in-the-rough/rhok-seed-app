@@ -17,9 +17,8 @@
         <td><%= locked_user.failed_attempts %></td>
         <td><%= locked_user.locked_at %></td>
         <td>
-          <%= form_tag( admin_unlock_url, :method => "put") do %>
-            <%= hidden_field_tag(:email, locked_user.email) %>
-            <%= submit_tag("Unlock", :class => "btn") %>
+          <%= form_for(locked_user, :url => admin_unlock_path(locked_user.id)) do |f| %>
+            <%= f.submit "Unlock", class: "btn" %>
           <% end %>
         </td>
       </tr>

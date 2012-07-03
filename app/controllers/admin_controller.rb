@@ -5,7 +5,7 @@ class AdminController < ApplicationController
 
 
   def index
-    @locked_users = User.where("locked_at IS NOT NULL") || []
+    @locked_users = User.locked 
     
     #TODO: actually get pending seeds
     @pending_seeds = []
@@ -14,7 +14,7 @@ class AdminController < ApplicationController
   def unlock_user
 
     #is this how you'd usually find the user?
-    @user_to_unlock = User.find_by_email(params[:email])
+    @user_to_unlock = User.find(params[:id])
 
     if @user_to_unlock
       @user_to_unlock.unlock_access!
