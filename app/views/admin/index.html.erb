@@ -1,33 +1,67 @@
 <h2>Locked Users</h2>
-<table>
+<table class="table table-striped table-condensed">
 
-  <strong>
+  <thead>
     <tr>
-      <td>User</td>
-      <td>Failed Login Attempts</td>
-      <td>Time of Lock</td>
+      <th>User</th>
+      <th>Failed Login Attempts</th>
+      <th>Time of Lock</th>
+      <th>Unlock</th>
     </tr>
-  </strong>
+  </thead>
 
-  <% @locked_users.each do |locked_user| %>
-    <tr>
-      <td><%= locked_user.email %></td>
-      <td><%= locked_user.failed_attempts %></td>
-      <td><%= locked_user.locked_at %></td>
-      <td><%= button_to "Unlock", admin_unlock_url %>
-    </tr>
-  <% end %>
+  <tbody>
+    <% @locked_users.each do |locked_user| %>
+      <tr>
+        <td><%= locked_user.email %></td>
+        <td><%= locked_user.failed_attempts %></td>
+        <td><%= locked_user.locked_at %></td>
+        <td>
+          <%= form_tag( admin_unlock_url, :method => "put") do %>
+            <%= hidden_field_tag(:email, locked_user.email) %>
+            <%= submit_tag("Unlock", :class => "btn") %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 
 </table>
   
 <h2>Pending Seed Approvals</h2>
-<table>
+<table class="table table-striped table-condensed">
 
-  <strong>
+  <thead>
     <tr>
-      <td>Seed</td>
+      <th>Common Name</th>
+      <th>Scientific Name</th>
+      <th>Hardiness Zone</th>
+      <th>Additional Info</th>
+      <th>Approve</th>
     </tr>
-  </strong>
+  </thead>
+
+  <tbody>
+    <% @pending_seeds.each do |pending_seed| %>
+      <tr>
+        <td><%= pending_seed.common_name %></td>
+        <td><%= pending_seed.scientific_name %></td>
+        <td><%= pending_seed.hardiness_zone %></td>
+        <td>
+          <%#TODO fill with relevant seed forms%>
+          <%#Make sure to have functionality for approval AND denial!%>
+          <%= form_tag( admin_unlock_url, :method => "put") do %>
+            <%= hidden_field_tag(:email, pending_seed.email) %>
+            <%= submit_tag("Approve", :class => "btn btn-success") %>
+          <% end %>
+          <%= form_tag( admin_unlock_url, :method => "put") do %>
+            <%= hidden_field_tag(:email, pending_seed.email) %>
+            <%= submit_tag("Deny", :class => "btn btn-danger") %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 
 </table>
   
