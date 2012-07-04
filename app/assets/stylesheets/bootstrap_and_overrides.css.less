@@ -36,6 +36,11 @@ html {
   overflow-y: scroll;
 }
 
+.logo {
+  color: lighten(@green, 5%);
+  font-weight: bold;
+}
+
 .center {
   text-align: center;
   h1 {
@@ -43,10 +48,19 @@ html {
   }
 }
 
-.app-name {
-  color: #5BB75B;
-  letter-spacing: -1px;
-  font-weight: bold;
+.hero-unit {
+  h1 {
+    .logo;
+  }
+}
+
+.navbar {
+  .brand {
+    &:hover {
+      color: @green;
+    }
+    .logo;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -71,6 +85,9 @@ h2 {
 p {
   font-size: 1.1em;
   line-height: 1.7em;
+}
+
+header {
 }
 
 footer {
