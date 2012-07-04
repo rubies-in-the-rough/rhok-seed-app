@@ -10,9 +10,9 @@
           <span class="icon-bar"></span>
         </a>
 
-        <a class="brand logo" href="#">
+        <%= link_to(root_path, class: 'brand logo') do %>
           <i class="icon-leaf"></i> Seed App
-        </a>
+        <% end %>
 
         <div class="nav-collapse">
           <% if user_signed_in? %>
