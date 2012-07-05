@@ -3,7 +3,6 @@ class SessionsController < Devise::SessionsController
   # GET /users/sign_in
   def new
     user = User.new
-    clean_up_passwords(user)
     respond_with(user, serialize_options(user))
   end
 
