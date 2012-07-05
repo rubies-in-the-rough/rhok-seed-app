@@ -1,8 +1,12 @@
 class AdminController < ApplicationController
-
   before_filter :authenticate_user!
-  # TODO: we need another filter to make sure the user is an admin!
+  before_filter :authenticate_admin!
 
+  def authenticate_admin!
+    unless current_user.admin
+      redirect_to new_user_session_url, alert: "You need to sign in or sign up before continuing." and return false
+    end
+  end
 
   def index
     @locked_users = User.locked 
