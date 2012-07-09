@@ -11,4 +11,10 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   #
   scope :locked, where("locked_at IS NOT NULL")
+
+  #prolly want to use a join here, but im unsure until we actually get the
+  #listings code written. something like
+  #scope :with_listings, joins(:listings).where(listings.length > 0)
+  #just a stub for now
+  scope :with_listings, where(true)
 end

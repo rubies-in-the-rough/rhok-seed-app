@@ -1,0 +1,23 @@
+<h2>User Listings</h2>
+<table class="table table-striped table-condensed">
+
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Seed Common Name</th>
+      <th>Listing</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users_with_listings.each do |user_with_listing| %>
+      <tr>
+        <%#the actual implementation of these rows cannot be known until we write listings and seeds, but this may be an interface to shoot for%>
+        <td><%= user_with_listing.email %></td>
+        <td><%= user_with_listing.listing.seed.common_name %></td>
+        <td><%= link_to "#{user_with_listing.listing.title}", listing_path(:listing_id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>

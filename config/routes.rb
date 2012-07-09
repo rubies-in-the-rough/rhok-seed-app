@@ -2,9 +2,22 @@ Rhok::Application.routes.draw do
   devise_for :users
   root :to => "static#home"
   
-  #I know, I know, I'm doign it wrong
-  match 'admin/index' => 'admin#index', :as => :admin
-  put 'admin/unlock/:id', :to => 'admin#unlock_user', :as => :admin_unlock
+  namespace :admin do
+    root :to => 'admin#index'
+
+    #Users
+    #unlocking
+    get 'users/locked', :to => 'user#show_locked', :as => :users_show_locked
+    put 'users/unlock/:id', :to => 'user#unlock', :as => :users_unlock
+    #viewing listings
+    get 'users/listings', :to => 'user#show_listings', :as => :users_show_listings
+
+    #Seeds
+    #proposals
+    get 'seeds', :to => 'seed#index', :as => :seeds
+    put 'seeds/approve/:id', :to => 'seed#approve', :as => :seeds_approve
+    put 'seeds/reject/:id', :to => 'seed#reject', :as => :seeds_reject
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
