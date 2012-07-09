@@ -5,7 +5,7 @@ class CreateSeeds < ActiveRecord::Migration
       t.string :scientific_name
       t.boolean :accepted, :default => false
       t.integer :hardiness_zone
-      t.string :additional_info, :default => "None."
+      t.text :additional_info, :default => "None."
 
       t.timestamps
     end

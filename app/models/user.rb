@@ -17,4 +17,8 @@ class User < ActiveRecord::Base
   #scope :with_listings, joins(:listings).where(listings.length > 0)
   #just a stub for now
   scope :with_listings, where(true)
+
+  has_many :listings
+  has_many :proposals
+  has_many :needs
 end
