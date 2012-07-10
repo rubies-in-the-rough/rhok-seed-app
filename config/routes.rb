@@ -3,7 +3,10 @@ Rhok::Application.routes.draw do
   devise_for :users
   root :to => "static#home"
 
-  resources :seeds, :only => [:index, :new, :create, :show]
+  resources :seeds, :only => [:index, :new, :create, :show] do
+    post 'search', to: 'seeds#search', as: 'search', on: :collection
+  end
+
   resources :listings
   
   namespace :admin do
