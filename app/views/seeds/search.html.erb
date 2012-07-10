@@ -3,69 +3,12 @@
 <h1>Results for <%= @query.split('%').last %></h1>
 <hr />
 <h2>Common Names</h2>
-<table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Scientific Name</th>
-      <th>Hardiness Zone</th>
-      <th>Listings</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @seeds_by_common_name.each do |seed| %>
-    <tr>
-        <td><%= link_to seed.common_name, seed %></td>
-        <td><%= link_to seed.scientific_name, seed %></td>
-        <td><%= seed.hardiness_zone%></td>
-        <td><%= seed.listings.length %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render partial: 'table', locals: {seeds: @seeds_of_common_name} %>
 
 <hr />
 <h2>Scientific Name</h2>
-<table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th>Scientific Name</th>
-      <th>Name</th>
-      <th>Hardiness Zone</th>
-      <th>Listings</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @seeds_by_scientific_name.each do |seed| %>
-    <tr>
-        <td><%= link_to seed.scientific_name, seed %></td>
-        <td><%= link_to seed.common_name, seed %></td>
-        <td><%= seed.hardiness_zone%></td>
-        <td><%= seed.listings.length %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render partial: 'table', locals: {seeds: @seeds_of_scientific_name, columns: [:scientific_name, :common_name, :hardiness_zone, :listings ]} %>
 
 <hr />
 <h2>Hardiness Zone</h2>
-<table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Scientific Name</th>
-      <th>Hardiness Zone</th>
-      <th>Listings</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @seeds_by_hardiness_zone.each do |seed| %>
-    <tr>
-        <td><%= link_to seed.common_name, seed %></td>
-        <td><%= link_to seed.scientific_name, seed %></td>
-        <td><%= seed.hardiness_zone%></td>
-        <td><%= seed.listings.length %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render partial: 'table', locals: {seeds: @seeds_of_hardiness_zone} %>
