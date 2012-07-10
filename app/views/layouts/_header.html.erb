@@ -18,9 +18,10 @@
           <% if user_signed_in? %>
           
           <ul class="nav">
-            <li><%= link_to "Link1", "/path1"  %></li>
-            <li><%= link_to "Link2", "/path2"  %></li>
-            <li><%= link_to "Link3", "/path3"  %></li>
+            <li><%= link_to "Browse Seeds", seeds_path  %></li>
+            <li><%= link_to "Search Seeds", "/path2"  %></li>
+            <li><%= link_to "My Listings", "/path3"  %></li>
+            <li><%= link_to "My Needs", "/path3"  %></li>
           <% if current_user.admin? %>
             <li><%= link_to "Site Administration", admin_root_path %></li>
           <% end %>
