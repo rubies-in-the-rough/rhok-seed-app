@@ -34,6 +34,26 @@ users = [
   }
 ]
  
+seeds = [
+ 
+  #example accepted seed
+  {
+    :common_name => "Corn",
+    :scientific_name => "Zea Mays",
+    :hardiness_zone => "4",
+    :additional_info => "Tastes delicious! Requires moderate sunlight.",
+    :accepted => true
+  },
+
+  #example unaccepted seed
+  {
+    :common_name => "Wheat",
+    :scientific_name => "Triticum",
+    :hardiness_zone => "6",
+    :additional_info => "Harvest in Fall. Key ingredient in Wheaties cereal."
+  }
+]
+
 users.each do |hash|
   begin
     olduser = User.find_by_email(hash[:email]) 
@@ -42,6 +62,22 @@ users.each do |hash|
     newuser = User.new
     hash.each do |attribute, value|
       newuser.update_attribute(attribute, value)
+    end
+  rescue Exception => e
+    puts e.message
+    puts e.class
+  end
+end
+
+ 
+seeds.each do |hash|
+  begin
+    oldseed = Seed.find_by_common_name(hash[:common_name]) 
+    oldseed.destroy if oldseed
+
+    newseed = Seed.new
+    hash.each do |attribute, value|
+      newseed.update_attribute(attribute, value)
     end
   rescue Exception => e
     puts e.message
