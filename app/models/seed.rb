@@ -3,4 +3,7 @@ class Seed < ActiveRecord::Base
 
   has_many :listings
   has_many :proposals
+
+  scope :accepted, where(:accepted => true)
+  scope :unaccepted, where(:accepted => false)
 end

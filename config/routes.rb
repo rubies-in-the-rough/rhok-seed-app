@@ -1,22 +1,25 @@
 Rhok::Application.routes.draw do
+
   devise_for :users
   root :to => "static#home"
+
+  resources :seeds, :only => [:index, :new, :create, :show]
   
   namespace :admin do
     root :to => 'admin#index'
 
     #Users
     #unlocking
-    get 'users/locked', :to => 'user#show_locked', :as => :users_show_locked
-    put 'users/unlock/:id', :to => 'user#unlock', :as => :users_unlock
+    get 'users/locked', :to => 'users#show_locked', :as => :users_show_locked
+    put 'users/unlock/:id', :to => 'users#unlock', :as => :users_unlock
     #viewing listings
-    get 'users/listings', :to => 'user#show_listings', :as => :users_show_listings
+    get 'users/listings', :to => 'users#show_listings', :as => :users_show_listings
 
     #Seeds
-    #proposals
-    get 'seeds', :to => 'seed#index', :as => :seeds
-    put 'seeds/approve/:id', :to => 'seed#approve', :as => :seeds_approve
-    put 'seeds/reject/:id', :to => 'seed#reject', :as => :seeds_reject
+    resources :seeds, :only => [:index, :show, :edit, :update, :destroy]
+    #and one more non-restful method...
+    put "seeds/accept/:id", :to => "seeds#accept", :as => :seed_accept
+    #just in case you're curious, destroy will be used to reject
   end
 
   # The priority is based upon order of creation:

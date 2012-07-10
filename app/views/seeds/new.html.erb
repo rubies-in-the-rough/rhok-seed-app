@@ -1,0 +1,16 @@
+<h2>New Seed</h2>
+
+<%#<%= form_for(seed, :url => { :action => "create" } do |f| %>
+<%= form_for(@seed) do |f| %>
+
+  <%= f.label :common_name, "Common Name" %>
+  <%= f.text_field :common_name %><br />
+  <%= f.label :scientific_name, "Scientific Name" %>
+  <%= f.text_field :scientific_name %><br />
+  <%= f.label :hardiness_zone, "Hardiness Zone" %>
+  <%= f.number_field :hardiness_zone %><br />
+  <%= f.label :additional_info, "Additional Info" %>
+  <%= f.text_area :additional_info %><br />
+
+  <%= f.submit "Create", class: "btn" %>
+<% end %>

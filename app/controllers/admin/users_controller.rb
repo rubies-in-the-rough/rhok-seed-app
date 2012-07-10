@@ -1,4 +1,4 @@
-class Admin::UserController < Admin::AdminController
+class Admin::UsersController < Admin::AdminController
   def show_locked
     @locked_users = User.locked 
   end

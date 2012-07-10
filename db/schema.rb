@@ -11,7 +11,45 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120626183331) do
+ActiveRecord::Schema.define(:version => 20120709205756) do
+
+  create_table "listings", :force => true do |t|
+    t.string   "strain"
+    t.integer  "seed_id"
+    t.integer  "seed_quantity"
+    t.text     "description"
+    t.integer  "lister_id"
+    t.integer  "accepted_proposal_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  create_table "needs", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "seed_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "proposals", :force => true do |t|
+    t.integer  "listing_id"
+    t.integer  "seed_id"
+    t.integer  "proposer_id"
+    t.string   "strain"
+    t.integer  "seed_quantity"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "seeds", :force => true do |t|
+    t.string   "common_name"
+    t.string   "scientific_name"
+    t.boolean  "accepted",        :default => false
+    t.integer  "hardiness_zone"
+    t.text     "additional_info", :default => "None."
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
