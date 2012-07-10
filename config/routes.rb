@@ -16,7 +16,7 @@ Rhok::Application.routes.draw do
     get 'users/listings', :to => 'users#show_listings', :as => :users_show_listings
 
     #Seeds
-    resources :seeds, :only => [:index, :show, :edit, :update, :destroy]
+    resources :seeds, :only => [:index, :destroy]
     #and one more non-restful method...
     put "seeds/accept/:id", :to => "seeds#accept", :as => :seed_accept
     #just in case you're curious, destroy will be used to reject

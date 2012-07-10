@@ -19,9 +19,8 @@
         <td><%= pending_seed.hardiness_zone %></td>
         <td><%= pending_seed.additional_info %></td>
         <td>
-          <%= button_to "Show", admin_seed_path(pending_seed), :method => :get, :form_class => "btn" %>
-          <%= button_to "Accept", admin_seed_accept_path(pending_seed), :method => :put, :form_class => "btn btn-success" %>
-          <%= button_to "Reject", admin_seed_path(pending_seed), :method => 'delete', :form_class => "btn btn-danger" %>
+          <%= button_to "Accept", admin_seed_accept_path(pending_seed), :method => :put, :class => "btn btn-success" %>
+          <%= button_to "Reject", admin_seed_path(pending_seed), :method => 'delete', :class => "btn btn-danger" %>
         </td>
       </tr>
     <% end %>

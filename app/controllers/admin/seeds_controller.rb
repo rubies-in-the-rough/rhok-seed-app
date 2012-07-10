@@ -12,7 +12,7 @@ class Admin::SeedsController < Admin::AdminController
     #flash[:notice] = "Accepted seed #{@seed_to_accept.common_name}."
     flash[:notice] = "Accepted seed <a href=\"#{url_for(@seed_to_accept)}\">#{@seed_to_accept.common_name}</a>.".html_safe
     #redirect_to seed_path(params[:id]) #back to seed (not admin)
-    redirect_to seeds_path #back to index
+    redirect_to admin_seeds_path #back to index
   end
 
   # reject a seed
@@ -22,7 +22,7 @@ class Admin::SeedsController < Admin::AdminController
     @seed_to_reject.destroy
 
     flash[:notice] = "Rejected seed #{@seed_to_reject.common_name}."
-    redirect_to seeds_index #back to index
+    redirect_to admin_seeds_path #back to index
   end
 
   def edit
