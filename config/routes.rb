@@ -4,6 +4,7 @@ Rhok::Application.routes.draw do
   root :to => "static#home"
 
   resources :seeds, :only => [:index, :new, :create, :show]
+  resources :listings
   
   namespace :admin do
     root :to => 'admin#index'
