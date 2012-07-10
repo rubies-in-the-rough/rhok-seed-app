@@ -1,0 +1,14 @@
+<%= render 'nav_well' %>
+
+<h1>Results for <%= @query.split('%').last %></h1>
+<hr />
+<h2>Common Names</h2>
+<%= render partial: 'table', locals: {seeds: @seeds_of_common_name} %>
+
+<hr />
+<h2>Scientific Name</h2>
+<%= render partial: 'table', locals: {seeds: @seeds_of_scientific_name, columns: [:scientific_name, :common_name, :hardiness_zone, :listings ]} %>
+
+<hr />
+<h2>Hardiness Zone</h2>
+<%= render partial: 'table', locals: {seeds: @seeds_of_hardiness_zone} %>

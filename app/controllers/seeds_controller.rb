@@ -37,4 +37,11 @@ class SeedsController < ApplicationController
 
     @listings = @seed.listings
   end
+
+  def search
+      @query = "%#{params[:query]}%" #escape that shit from sql injections
+      @seeds_of_common_name = Seed.find_all_like_common_name(@query)
+      @seeds_of_scientific_name = Seed.find_all_like_scientific_name(@query)
+      @seeds_of_hardiness_zone = Seed.find_all_in_hardiness_zone(@query)
+  end
 end
