@@ -1,5 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-
-<%= link_to 'Edit', edit_listing_path(@listing) %> |
-<%= link_to 'Back', listings_path %>
+<h2><%= @listing.strain%> <%= @listing.seed[:common_name]%></h2>
+<label>Submitted by:</label><%= link_to @listing.lister[:email], @listing.lister %> <br>
+<label>Quantity:</label><%= @listing.seed_quantity %> <br>
+<label>Description:</label><%= @listing.description %>

@@ -20,5 +20,19 @@ class User < ActiveRecord::Base
 
   has_many :listings, foreign_key: :lister_id
   has_many :proposals, foreign_key: :proposer_id
-  has_many :needs
+  has_many :needs, dependent: :destroy
+  has_many :needed_seeds, through: :needs, source: :seed
+
+  def needing?(seed)
+    needs.find_by_seed_id(seed.id)
+  end
+
+  def need!(seed)
+    needs.create!(seed_id: seed.id)
+  end
+
+  def unneed!(seed)
+    needs.find_by_seed_id(seed.id).destroy
+  end
+
 end

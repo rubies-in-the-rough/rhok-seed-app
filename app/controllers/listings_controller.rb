@@ -43,9 +43,9 @@ class ListingsController < ApplicationController
   # POST /listings
   # POST /listings.json
   def create
-    @listing = Listing.new()
+    @listing = Listing.new(params[:listing])
     @listing.lister = current_user
-    @listing.seed = Seed.find(params[:seed])
+
 
     respond_to do |format|
       if @listing.save
@@ -84,11 +84,5 @@ class ListingsController < ApplicationController
       format.html { redirect_to listings_url }
       format.json { head :no_content }
     end
-  end
-
-  def userListings
-    @user = User.find(params[:uid])
-    @listings = Listing.find(:all, :conditions => {:lister_id => @user})
-    
   end
 end
