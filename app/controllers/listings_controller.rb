@@ -85,4 +85,9 @@ class ListingsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def search
+    @query = "%#{params[:query]}%" #escape that shit from sql injections
+    @listings_of_strain = Listing.find_all_like_strain(@query)
+  end
 end

@@ -1,5 +1,5 @@
 <h2>Seeds</h2>
 
-<%= render 'nav_well' %>
+<%= render partial: 'shared/search_form', locals: {search_path: search_seeds_path} %>
 
 <%= render partial: 'table', locals: {seeds: @seeds} %>

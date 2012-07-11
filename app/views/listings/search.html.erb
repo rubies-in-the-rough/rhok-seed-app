@@ -1,0 +1,6 @@
+<%= render partial: 'shared/search_form', locals: {search_path: search_listings_path} %>
+
+<h1>Results for "<%= @query.split('%').last %>" in Listings</h1>
+<hr />
+<h2>Strains</h2>
+<%= render partial: 'table', locals: {listings: @listings_of_strain} %>

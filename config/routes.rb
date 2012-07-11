@@ -8,7 +8,9 @@ Rhok::Application.routes.draw do
     post 'search', to: 'seeds#search', as: 'search', on: :collection
   end
 
-  resources :listings
+  resources :listings do
+    post 'search', to: 'listings#search', as: 'search', on: :collection
+  end
 
   resources :users, :only => [:index, :show]
 
