@@ -3,8 +3,6 @@
 <b>Hardiness Zone:</b> <%= @seed.hardiness_zone %><br />
 <b>Additional Info:</b> <%= @seed.additional_info %><br />
 
-<% if not @listings.empty? %>
-	<%= render 'listings' %>
-<% end %>
+<%= render 'listings' %>
 
-<%= link_to "Back to seeds index", seeds_path %>
+<%= link_to "Add a new listing", "/listings/new" %> | <%= link_to "Back to browse seeds", seeds_path %>

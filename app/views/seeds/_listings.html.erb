@@ -2,7 +2,7 @@
 <div id="listings">
 	<% @listings.each do |l| %>
 		<div class="listing">
-			<%= link_to l.seed l %>
+			<%= link_to "Listing #{l.id} submitted by #{l.lister[:email]}", listing_path(l)  %>
 		</div>
 	<% end %>
 </div>
