@@ -35,7 +35,7 @@ class SeedsController < ApplicationController
       redirect_to :action => "index"
     end
 
-    @listings = @seed.listings
+    @listings = Listing.find(:all, :conditions => {:seed_id => @seed})
   end
 
   def search

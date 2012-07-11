@@ -43,8 +43,9 @@ class ListingsController < ApplicationController
   # POST /listings
   # POST /listings.json
   def create
-    @listing = Listing.new(params[:listing])
+    @listing = Listing.new()
     @listing.lister = current_user
+    @listing.seed = Seed.find(params[:seed])
 
     respond_to do |format|
       if @listing.save
