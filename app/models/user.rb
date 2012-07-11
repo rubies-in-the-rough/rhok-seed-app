@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   #just a stub for now
   scope :with_listings, where(true)
 
-  has_many :listings
-  has_many :proposals
+  has_many :listings, foreign_key: :lister_id
+  has_many :proposals, foreign_key: :proposer_id
   has_many :needs
 end
