@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+<h2><%= @user[:email] %>'s Listings</h2>
+<div id="listings">
+	<% @listings.each do |l| %>
+		<div class="listing">
+			<%= link_to "Listing #{l.id}", listing_path(l) %>
+		</div>
+	<% end %>
+</div>
