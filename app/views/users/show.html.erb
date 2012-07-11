@@ -1,9 +1,33 @@
-<p id="notice"><%= notice %></p>
 <h2><%= @user[:email] %>'s Listings</h2>
-<div id="listings">
-	<% @listings.each do |l| %>
-		<div class="listing">
-			<%= link_to "#{l[:seed_quantity]} #{l[:strain]} #{l.seed[:common_name]}", listing_path(l) %>
-		</div>
-	<% end %>
-</div>
+
+<% if @listings.empty? %>
+
+	<p>You have not submitted any listings.</p>
+
+<% else %>
+	<table class="table table-striped table-bordered">
+	  <thead>
+	    <tr>
+	      <th>Listing</th>
+	      <% if @user == current_user %>
+	      <th>Remove</th>
+	      <% end %>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	  <% @listings.each do |l| %>
+	    <tr>
+	      <td><%= link_to "#{l[:seed_quantity]} #{l[:strain]} #{l.seed[:common_name]}", listing_path(l) %></td>
+	      <% if @user == current_user %>
+	      <td>
+	      	<%= form_for(l, html: { method: :delete }) do |f| %>
+            <%= f.submit "Remove", class: "btn btn-danger" %>
+            <% end %>
+	      </td>
+	      <% end %>
+	    </tr>
+	  <% end %>
+	  </tbody>
+	</table>
+<% end %>

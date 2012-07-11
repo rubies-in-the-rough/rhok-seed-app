@@ -1,8 +1,24 @@
 <h2>Listings for <%= @seed.common_name %></h2>
-<div id="listings">
-	<% @listings.each do |l| %>
-		<div class="listing">
-			<%= link_to "#{l[:seed_quantity]} #{l[:strain]} #{@seed[:common_name]}", listing_path(l) %> submitted by <%= link_to "#{l.lister[:email]}", l.lister  %>
-		</div>
-	<% end %>
-</div>
+<% if @listings.empty? %>
+
+	<p>No listings available. Why don't you add your own!</p>
+
+<% else %>
+	<table class="table table-striped table-bordered">
+	  <thead>
+	    <tr>
+	      <th>Listing</th>
+	      <th>Submitted by</th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	  <% @listings.each do |l| %>
+	    <tr>
+	      <td><%= link_to "#{l[:seed_quantity]} #{l[:strain]} #{@seed[:common_name]}", listing_path(l) %></td>
+	      <td> <%= link_to "#{l.lister[:email]}", l.lister  %></td>
+	    </tr>
+	  <% end %>
+	  </tbody>
+	</table>
+<% end %>
