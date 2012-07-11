@@ -45,7 +45,8 @@ class ListingsController < ApplicationController
   def create
     @listing = Listing.new()
     @listing.lister = current_user
-    @listing.seed = Seed.find(params[:seed])
+    @listing.seed = Seed.find(params[:listing][:seed_id])
+
 
     respond_to do |format|
       if @listing.save
