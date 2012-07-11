@@ -1,6 +1,7 @@
 Rhok::Application.routes.draw do
 
   devise_for :users, :module => "user"
+
   root :to => "static#home"
 
   resources :seeds, :only => [:index, :new, :create, :show] do
@@ -8,6 +9,8 @@ Rhok::Application.routes.draw do
   end
 
   resources :listings
+
+  resources :needs, :only => [:index, :create, :destroy]
   
   namespace :admin do
     root :to => 'admin#index'
