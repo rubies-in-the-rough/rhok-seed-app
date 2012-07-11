@@ -1,4 +1,6 @@
-<h2>New Seed</h2>
+<h2>Suggest a New Seed</h2>
+
+<p>In order to maintain the integrity of our seed database, we allow users to only suggest seeds for inclusion on Seed App. Seed suggestions will then be reviewed by administrators and added if appropriate.</p>
 
 <%#<%= form_for(seed, :url => { :action => "create" } do |f| %>
 <%= form_for(@seed) do |f| %>
@@ -12,5 +14,6 @@
   <%= f.label :additional_info, "Additional Info" %>
   <%= f.text_area :additional_info %><br />
 
-  <%= f.submit "Create", class: "btn" %>
+  <%= f.submit "Suggest", class: "btn" %>
 <% end %>
+
