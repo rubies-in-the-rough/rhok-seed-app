@@ -16,8 +16,6 @@ Rhok::Application.routes.draw do
     #unlocking
     get 'users/locked', :to => 'users#show_locked', :as => :users_show_locked
     put 'users/unlock/:id', :to => 'users#unlock', :as => :users_unlock
-    #viewing listings
-    get 'users/listings', :to => 'users#show_listings', :as => :users_show_listings
 
     #Seeds
     resources :seeds, :only => [:index, :destroy]
