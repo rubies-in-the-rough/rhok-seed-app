@@ -32,7 +32,7 @@ class SeedsController < ApplicationController
 
     unless @seed.accepted
       flash[:notice] = "That seed is still subject to administrator approval"
-      redirect_to :action => "index"
+      redirect_to seeds_path
     end
 
     @listings = @seed.listings
