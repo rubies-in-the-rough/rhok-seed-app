@@ -43,10 +43,8 @@ class ListingsController < ApplicationController
   # POST /listings
   # POST /listings.json
   def create
-    @listing = Listing.new()
+    @listing = Listing.new(params[:listing])
     @listing.lister = current_user
-    @listing.seed = Seed.find(params[:listing][:seed_id])
-    @listing.strain = params[:listing][:strain]
 
 
     respond_to do |format|

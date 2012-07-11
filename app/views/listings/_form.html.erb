@@ -21,7 +21,21 @@
   <div class="control-group">
     <%= f.label :strain, class: 'control-label'%>
     <div class="controls">
-      <%= f.text_field :strain, class: 'input-xlarge'%> <i>(optional)</i>
+      <%= f.text_field :strain, class: 'input-xlarge'%>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :quantity, class: 'control-label'%>
+    <div class="controls">
+      <%= f.text_field :seed_quantity, class: 'input-mini'%>
+    </div>
+  </div>
+
+    <div class="control-group">
+    <%= f.label :description, class: 'control-label'%>
+    <div class="controls">
+      <%= f.text_area :description%>
     </div>
   </div>
 
