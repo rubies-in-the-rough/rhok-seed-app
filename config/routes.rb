@@ -1,6 +1,6 @@
 Rhok::Application.routes.draw do
 
-  devise_for :users, :module => "user"
+  devise_for :users, :module => "users"
 
   root :to => "static#home"
 
