@@ -8,17 +8,14 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  # attr_accessible :title, :body
-  #
+
   scope :locked, where("locked_at IS NOT NULL")
 
-  #prolly want to use a join here, but im unsure until we actually get the
-  #listings code written. something like
-  #scope :with_listings, joins(:listings).where(listings.length > 0)
-  #just a stub for now
-  scope :with_listings, where(true)
+  scope :find_all_like_email, lambda { |email| where('email like ?', email).order('email') }
 
   has_many :listings, foreign_key: :lister_id
+  #TODO: has many listing_proposed_on through proposals source listing
+  #and index these listings_proposed_on when a user views their own profile
   has_many :proposals, foreign_key: :proposer_id
   has_many :needs, dependent: :destroy
   has_many :needed_seeds, through: :needs, source: :seed

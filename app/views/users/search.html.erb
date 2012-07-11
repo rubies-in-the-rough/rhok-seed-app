@@ -1,0 +1,6 @@
+<%= render partial: 'shared/search_form', locals: {search_path: search_users_path} %>
+
+<h1>Results for "<%= @query.split('%').last %>" in Users</h1>
+<hr />
+<h2>Email</h2>
+<%= render partial: 'table', locals: {users: @users_of_email} %>

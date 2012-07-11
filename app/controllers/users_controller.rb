@@ -81,4 +81,9 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def search
+    @query = "%#{params[:query]}%" #escape that shit from sql injections
+    @users_of_email = User.find_all_like_email(@query)
+  end
 end
