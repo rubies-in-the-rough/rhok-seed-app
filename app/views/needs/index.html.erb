@@ -1,0 +1,30 @@
+<h2>My Needs</h2>
+<table class="center table table-striped table-condensed">
+
+  <thead>
+    <tr>
+      <th>Common Name</th>
+      <th>Scientific Name</th>
+      <th>Remove?</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @needed_seeds.each do |needed_seed| %>
+      <tr>
+        <td><%= needed_seed.common_name %></td>
+        <td><%= needed_seed.scientific_name %></td>
+        <%#TODO: figure out how to render seeds/unneed partial here instead%>
+        <td>
+          <%#<%= render 'seeds/unneed', locals: { :seed => needed_seed }  or something%>
+          <%= form_for(current_user.needs.find_by_seed_id(needed_seed),
+                       html: { method: :delete }) do |f| %>
+            <%= f.submit "Remove", class: "btn btn-danger" %>
+          <% end %>
+        </td>
+
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>

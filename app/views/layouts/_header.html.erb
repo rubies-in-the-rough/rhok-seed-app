@@ -21,7 +21,7 @@
             <li><%= link_to "Browse Seeds", seeds_path  %></li>
             <li><%= link_to "Browse Farmers", users_path %></li>
             <li><%= link_to "My Listings", current_user%></li>
-            <li><%= link_to "My Needs", "/path3"  %></li>
+            <li><%= link_to "My Needs", needs_path  %></li>
           <% if current_user.admin? %>
             <li><%= link_to "Site Administration", admin_root_path %></li>
           <% end %>
