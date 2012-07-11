@@ -46,6 +46,7 @@ class ListingsController < ApplicationController
     @listing = Listing.new()
     @listing.lister = current_user
     @listing.seed = Seed.find(params[:listing][:seed_id])
+    @listing.strain = params[:listing][:strain]
 
 
     respond_to do |format|

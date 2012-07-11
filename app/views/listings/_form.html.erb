@@ -15,6 +15,14 @@
     <div class="controls">
       <%= f.select :seed_id, Seed.all.collect {|s| [s.common_name, s.id]}, {}, 'data-placeholder' => "Choose a Seed", class: 'chosen-select' %>
     </div>
+    
+  </div>
+
+  <div class="control-group">
+    <%= f.label :strain, class: 'control-label'%>
+    <div class="controls">
+      <%= f.text_field :strain, class: 'input-xlarge'%> <i>(optional)</i>
+    </div>
   </div>
 
   <div class="form-actions">
