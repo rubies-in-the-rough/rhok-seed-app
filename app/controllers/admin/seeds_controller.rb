@@ -25,22 +25,4 @@ class Admin::SeedsController < Admin::AdminController
     redirect_to admin_seeds_path #back to index
   end
 
-  def edit
-    @seed = Seed.find(params[:id])
-  end
-
-  def show
-    @seed = Seed.find(params[:id])
-  end
-
-  def update
-    @seed = Seed.find(params[:id])
-    if @seed.update_attributes(params[:seed])
-      redirect_to seed_path(params[:id])
-    else
-      #TODO: show validation errors
-      flash.now[:error] = "Something is wrong with that seed"
-      render :action => "edit"
-    end
-  end
 end

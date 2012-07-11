@@ -1,6 +1,6 @@
 class SeedsController < ApplicationController
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:index, :show]
 
   def index
     @seeds = Seed.accepted
@@ -32,7 +32,7 @@ class SeedsController < ApplicationController
 
     unless @seed.accepted
       flash[:notice] = "That seed is still subject to administrator approval"
-      redirect_to :action => "index"
+      redirect_to seeds_path
     end
 
     @listings = Listing.find(:all, :conditions => {:seed_id => @seed})

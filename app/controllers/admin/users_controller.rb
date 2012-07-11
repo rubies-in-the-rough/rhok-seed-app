@@ -10,17 +10,9 @@ class Admin::UsersController < Admin::AdminController
       @user_to_unlock.unlock_access!
 
       # TODO: the interpolation here isn't working
-      flash[:notice] = "User #{params[:email]} has been unlocked"
+      flash[:notice] = "User #{@user_to_unlock.email} has been unlocked"
     end
 
-    redirect_to :action => "show_locked"
-  end
-
-  def show_listings
-    # TODO: make this functional
-    # ensure the with_listings scope works
-    # modify views/admin/user/show_listings.html.erb to display relevant data
-    #@users_with_listings = User.with_listings
-    @users_with_listings = []
+    redirect_to admin_users_show_locked_path
   end
 end
