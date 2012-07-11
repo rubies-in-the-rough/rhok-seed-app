@@ -2,7 +2,7 @@
 <div id="listings">
 	<% @listings.each do |l| %>
 		<div class="listing">
-			<%= link_to "Listing #{l.id} submitted by #{l.lister[:email]}", listing_path(l)  %>
+			<%= link_to "Listing #{l.id}", listing_path(l) %> submitted by <%= link_to "#{l.lister[:email]}", "/user/#{l.lister[:id]}/listings"  %>
 		</div>
 	<% end %>
 </div>

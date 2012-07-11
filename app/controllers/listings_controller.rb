@@ -85,4 +85,10 @@ class ListingsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def userListings
+    @user = User.find(params[:uid])
+    @listings = Listing.find(:all, :conditions => {:lister_id => @user})
+    
+  end
 end

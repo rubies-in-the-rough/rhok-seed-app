@@ -8,6 +8,8 @@ Rhok::Application.routes.draw do
   end
 
   resources :listings
+
+  match "user/:uid/listings" => "listings#userListings"
   
   namespace :admin do
     root :to => 'admin#index'
