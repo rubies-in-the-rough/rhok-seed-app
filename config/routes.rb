@@ -9,7 +9,7 @@ Rhok::Application.routes.draw do
 
   resources :listings
 
-  match "user/:uid/listings" => "listings#userListings"
+  resources :users, :only => [:index, :show]
   
   namespace :admin do
     root :to => 'admin#index'
