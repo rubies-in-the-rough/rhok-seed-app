@@ -1,0 +1,56 @@
+<h2>Listings Proposed On</h2>
+
+<div class="result-count">
+  <p><%= "#{pluralize(proposals.count, "proposal")} found." %></p>
+</div>
+
+<table class="table table-striped table-bordered">
+  <thead>
+
+    <tr>
+      <th colspan="4">Proposal</th>
+      <th colspan="3">Listing</th>
+      <th colspan="1">Remove Proposal</th>
+    </tr>
+
+    <tr>
+      <%#Proposal%>
+      <th>Strain</th>
+      <th>Common Name</th>
+      <th>Seed Quantity</th>
+      <th>Created At</th>
+
+      <%#Listing%>
+      <th>Strain</th>
+      <th>Common Name</th>
+      <th>Seed Quantity</th>
+
+      <%#Remove Proposal%>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% proposals.each do |proposal| %>
+    <tr>
+      <%#Proposal%>
+      <td><%= proposal.strain %></td>
+      <td><%= proposal.seed.common_name %></td>
+      <td><%= proposal.seed_quantity %></td>
+      <td><%= proposal.created_at %></td>
+
+      <%#Listing%>
+      <td><%= proposal.listing.strain %></td>
+      <td><%= proposal.listing.seed.common_name %></td>
+      <td><%= proposal.listing.seed_quantity %></td>
+
+      <%#Remove Proposal%>
+      <td>
+        <%= form_for(proposal, html: { method: :delete }) do |f| %>
+          <%= f.submit "Remove", class: "btn btn-danger" %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

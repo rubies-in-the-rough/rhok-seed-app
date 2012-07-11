@@ -14,8 +14,7 @@ class User < ActiveRecord::Base
   scope :find_all_like_email, lambda { |email| where('email like ?', email).order('email') }
 
   has_many :listings, foreign_key: :lister_id
-  #TODO: has many listing_proposed_on through proposals source listing
-  #and index these listings_proposed_on when a user views their own profile
+  has_many :listings_proposed_on, through: :proposals, source: :listing
   has_many :proposals, foreign_key: :proposer_id
   has_many :needs, dependent: :destroy
   has_many :needed_seeds, through: :needs, source: :seed
