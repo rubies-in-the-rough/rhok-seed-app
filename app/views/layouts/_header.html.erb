@@ -15,33 +15,77 @@
         <% end %>
 
         <div class="nav-collapse">
-          <% if user_signed_in? %>
-          
           <ul class="nav">
-            <li><%= link_to "Browse Seeds", seeds_path  %></li>
-            <li><%= link_to "Browse Farmers", users_path %></li>
-            <li><%= link_to "My Listings", current_user%></li>
-            <li><%= link_to "My Needs", needs_path  %></li>
-          <% if current_user.admin? %>
-            <li><%= link_to "Site Administration", admin_root_path %></li>
-          <% end %>
+
+            <li class="divider-vertical"></li>
+
+            <%#Seeds Dropdown%>
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-leaf"></i> Seeds <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Browse seeds", seeds_path %></li>
+                <% if user_signed_in? %>
+                  <li><%= link_to "Suggest new seed", new_seed_path %></li>
+                <% end %>
+              </ul>
+            </li>
+
+            <%#Listings Dropdown%>
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-list-alt"></i> Listings <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Browse listings", listings_path %></li>
+                <% if user_signed_in? %>
+                  <li><%= link_to "View my listings", current_user %></li>
+                  <li><%= link_to "Create new listing", new_listing_path %></li>
+                <% end %>
+              </ul>
+            </li>
+
+            <%#Growers Dropdown%>
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-globe"></i> Growers <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Browse profiles", users_path %></li>
+                <% if user_signed_in? %>
+                  <li><%= link_to "View my profile", current_user %></li>
+                <% end %>
+              </ul>
+            </li>
+
+            <%#Admin Dropdown%>
+            <% if user_signed_in? and current_user.admin? %>
+              <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-wrench"></i> Site Administration <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "Accept/Reject seeds", admin_seeds_path %></li>
+                  <li><%= link_to "Unlock users", admin_users_show_locked_path %></li>
+                </ul>
+              </li>
+            <% end %>
           </ul>
             
           <ul class="nav pull-right">
-            <li class="divider-vertical"></li>
-            <li><%= link_to "My Account", edit_user_registration_path%></li>
-            <li><%= link_to "Logout", destroy_user_session_url, method: :delete%></li>
+
+            <% if user_signed_in? %>
+              <%#Account Dropdown%>
+              <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-user"></i> My Account <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "Edit my account", "edit_user_path" %></li>
+                  <li><%= link_to "Edit my needs", needs_path %></li>
+                </ul>
+              </li>
+              <li><%= link_to "<i class=\"icon-remove-sign\"></i> Logout".html_safe, destroy_user_session_url, method: :delete%></li>
+
+            <% else %>
+
+              <li> <%= link_to "<i class=\"icon-user\"></i> Login".html_safe, new_user_session_path%> </li>
+              <li> <%= link_to "<i class=\"icon-plus\"></i> Register".html_safe, new_user_registration_path%> </li>
+
+            <% end %>
+
           </ul>
-
-          <% else %>
-
-          <ul class="nav pull-right">
-            <li class="divider-vertical"></li>
-            <li> <%= link_to "Login", new_user_session_path%> </li>
-            <li> <%= link_to "Register", new_user_registration_path%> </li>
-          </ul>
-
-          <% end %>
         </div>
       </div>
     </div>
