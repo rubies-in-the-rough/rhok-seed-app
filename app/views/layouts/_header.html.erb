@@ -25,6 +25,7 @@
               <ul class="dropdown-menu">
                 <li><%= link_to "Browse seeds", seeds_path %></li>
                 <% if user_signed_in? %>
+                  <li><%= link_to "Edit my needs", needs_path %></li>
                   <li><%= link_to "Suggest new seed", new_seed_path %></li>
                 <% end %>
               </ul>
