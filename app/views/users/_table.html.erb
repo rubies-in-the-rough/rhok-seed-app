@@ -1,4 +1,4 @@
-<% columns = [:email, :listings] if local_assigns[:columns].nil? %>
+<% columns = [:email, :listings, :needs] if local_assigns[:columns].nil? %>
 
 <div class="result-count">
   <p><%= "#{pluralize(users.count, "user")} found." %></p>
@@ -17,11 +17,14 @@
     <tr>
       <% columns.each do |column| %>
         <% if column == :listings %>
-          <td><%= link_to "#{user.listings.count} listing".pluralize(user.listings.count), user %></td>
+          <td><%= "#{user.listings.count} listing".pluralize(user.listings.count) %></td>
+        <% elsif column == :needs %>
+          <td><%= "#{user.needs.count} need".pluralize(user.needs.count) %></td>
         <% else %>
           <td><%= user.send(column.to_sym) %></td>
         <% end %>
       <% end %>
+      <td><%= link_to 'Profile', user, class: 'btn btn-primary' %></td>
     </tr>
     <% end %>
   </tbody>
