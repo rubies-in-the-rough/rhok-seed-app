@@ -8,7 +8,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /users/sign_in
   def create
-    user = warden.authenticate!(:scope => "user", :recall => "users/sessions#new")
+    user = warden.authenticate!(scope: :user, recall: "users/sessions#new")
     set_flash_message(:notice, :signed_in) if is_navigational_format?
     sign_in("user", user)
     respond_with user, :location => after_sign_in_path_for(user)
