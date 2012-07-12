@@ -1,4 +1,4 @@
-<% columns = [:common_name, :scientific_name, :hardiness_zone, :listings ] if local_assigns[:columns].nil? %>
+<% columns = [:common_name, :scientific_name, :hardiness_zone, :listings, :add_to_needs] if local_assigns[:columns].nil? %>
 
 <div class="result-count">
   <p><%= "#{pluralize(seeds.count, "seed")} found." %></p>
@@ -18,6 +18,17 @@
       <% columns.each do |column| %>
         <% if column == :listings %>
           <td><%= link_to "#{seed.listings.count} listing".pluralize(seed.listings.count), seed %></td>
+        <% elsif column == :add_to_needs %>
+          <td>
+            <center>
+              <% if not current_user.needing?(seed) %>
+                <%= form_for(current_user.needs.build(seed_id: seed.id)) do |f| %>
+                  <div><%= f.hidden_field :seed_id %></div>
+                  <%= f.submit "Add this to my needs", class: "btn btn-success" %>
+                <% end %>
+              <% end %>
+           </center>
+          </td>
         <% else %>
           <td><%= seed.send(column.to_sym) %></td>
         <% end %>
