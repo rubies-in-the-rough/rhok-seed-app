@@ -12,7 +12,9 @@ Rhok::Application.routes.draw do
     post 'search', to: 'listings#search', as: 'search', on: :collection
   end
 
-  resources :users, :only => [:index, :show]
+  resources :users, :only => [:index, :show] do
+    post 'search', to: 'users#search', as: 'search', on: :collection
+  end
 
   resources :needs, :only => [:index, :create, :destroy]
   

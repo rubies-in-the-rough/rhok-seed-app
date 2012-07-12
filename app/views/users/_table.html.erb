@@ -1,0 +1,28 @@
+<% columns = [:email, :listings] if local_assigns[:columns].nil? %>
+
+<div class="result-count">
+  <p><%= "#{pluralize(users.count, "user")} found." %></p>
+</div>
+
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <% columns.each do |column| %>
+        <th><%= column.to_s.titleize %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.each do |user| %>
+    <tr>
+      <% columns.each do |column| %>
+        <% if column == :listings %>
+          <td><%= link_to "#{user.listings.count} listing".pluralize(user.listings.count), user %></td>
+        <% else %>
+          <td><%= user.send(column.to_sym) %></td>
+        <% end %>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
