@@ -26,6 +26,8 @@
                   <div><%= f.hidden_field :seed_id %></div>
                   <%= f.submit "Add this to my needs", class: "btn btn-success" %>
                 <% end %>
+              <% else %>
+                <a href="#" class="btn disabled">Already needed</a>
               <% end %>
            </center>
           </td>
