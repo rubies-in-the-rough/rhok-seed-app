@@ -1,4 +1,4 @@
-<% columns = [:strain, :common_name, :seed_quantity, :listed_by, :created_at ] if local_assigns[:columns].nil? %>
+<% columns = [:strain, :common_name, :seed_quantity, :listed_by, :proposals, :created_at ] if local_assigns[:columns].nil? %>
 
 <div class="result-count">
   <p><%= "#{pluralize(listings.count, "listing")} found." %></p>
@@ -22,6 +22,8 @@
           <td><%= listing.seed.common_name %></td>
         <% elsif column == :listed_by %>
           <td><%= listing.lister.email %></td>
+        <% elsif column == :proposals %>
+          <td><%= listing.proposals.count %></td>
         <% else %>
           <td><%= listing.send(column.to_sym) %></td>
         <% end %>
