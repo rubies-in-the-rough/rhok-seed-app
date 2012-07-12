@@ -1,5 +1,6 @@
 class Listing < ActiveRecord::Base
   has_one :accepted_proposal, :class_name => "Proposal"
+  has_many :proposals, :class_name => 'Proposal'
   belongs_to :lister, :class_name => "User"
   belongs_to :seed
 

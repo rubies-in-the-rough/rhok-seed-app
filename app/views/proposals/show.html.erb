@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Listing:</b>
+  <%= @proposal.listing_id %>
+</p>
+
+<p>
+  <b>Seed:</b>
+  <%= @proposal.seed_id %>
+</p>
+
+<p>
+  <b>Seed quantity:</b>
+  <%= @proposal.seed_quantity %>
+</p>
+
+<p>
+  <b>Strain:</b>
+  <%= @proposal.strain %>
+</p>
+
+
+<%= link_to 'Edit', edit_listing_proposal_path(@listing, @proposal) %> |
+<%= link_to 'Back', listing_proposals_path(@listing) %>

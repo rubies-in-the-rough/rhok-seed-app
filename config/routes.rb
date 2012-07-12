@@ -10,6 +10,7 @@ Rhok::Application.routes.draw do
 
   resources :listings do
     post 'search', to: 'listings#search', as: 'search', on: :collection
+    resources :proposals
   end
 
   resources :users, :only => [:index, :show] do

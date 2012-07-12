@@ -2,3 +2,5 @@
 <label>Submitted by:</label><%= link_to @listing.lister[:email], @listing.lister %> <br>
 <label>Quantity:</label><%= @listing.seed_quantity %> <br>
 <label>Description:</label><%= @listing.description %>
+
+<%= link_to "Make an Offer", new_listing_proposal_path(@listing) %>
