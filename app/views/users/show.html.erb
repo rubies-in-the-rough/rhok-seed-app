@@ -3,5 +3,5 @@
 <%= render :partial => 'listings', locals: {user: @user} %>
 
 <% if current_user == @user %>
-  <%= render :partial => 'listings_proposed_on', locals: { proposals: @user.proposals } %>
+  <%= render :partial => 'proposals', locals: { proposals: @user.proposals } %>
 <% end %>
