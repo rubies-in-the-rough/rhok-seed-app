@@ -36,12 +36,26 @@ users = [
  
 seeds = [
  
-  #example accepted seed
+  #example accepted seeds
   {
     :common_name => "Corn",
     :scientific_name => "Zea Mays",
     :hardiness_zone => "4",
     :additional_info => "Tastes delicious! Requires moderate sunlight.",
+    :accepted => true
+  },
+  {
+    :common_name => "Orange",
+    :scientific_name => "Oranginumus",
+    :hardiness_zone => "8",
+    :additional_info => "Requires constant sunlight and at least weekly rainfall of 3 inches.",
+    :accepted => true
+  },
+  {
+    :common_name => "Peach",
+    :scientific_name => "Georgipum",
+    :hardiness_zone => "7",
+    :additional_info => "Best grown in Georgia.",
     :accepted => true
   },
 
