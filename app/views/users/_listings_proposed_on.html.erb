@@ -45,11 +45,7 @@
       <td><%= proposal.listing.seed_quantity %></td>
 
       <%#Remove Proposal%>
-      <td>
-        <%= form_for(proposal, html: { method: :delete }) do |f| %>
-          <%= f.submit "Remove", class: "btn btn-danger" %>
-        <% end %>
-      </td>
+      <td><%= button_to 'Remove', listing_proposal_path(proposal.listing, proposal), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
     </tr>
   <% end %>
   </tbody>

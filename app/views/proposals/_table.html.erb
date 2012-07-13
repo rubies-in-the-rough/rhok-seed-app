@@ -1,0 +1,32 @@
+
+<%= link_to 'New Proposal', new_listing_proposal_path(@listing), class: 'btn btn-primary' %>
+
+<br />
+<br />
+
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>Strain</th>
+    <th>Seed</th>
+    <th>Seed quantity</th>
+    <% if current_user.id == listing.lister.id %>
+      <th></th>
+      <th></th>
+      <th></th>
+    <% end %>
+  </tr>
+
+<% proposals.each do |proposal| %>
+  <tr>
+    <td><%= proposal.strain %></td>
+    <td><%= proposal.seed.common_name %></td>
+    <td><%= proposal.seed_quantity %></td>
+    <% if current_user.id == listing.lister.id %>
+      <td><%= link_to "Show".html_safe, listing_proposal_path(@listing, proposal), class: 'btn btn-mini btn-success' %></td>
+      <td><%= link_to 'Edit', edit_listing_proposal_path(@listing, proposal), class: 'btn btn-mini' %></td>
+      <td><%= link_to 'Destroy', listing_proposal_path(@listing, proposal), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-mini btn-danger' %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+

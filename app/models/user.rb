@@ -10,7 +10,6 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
   has_many :listings, foreign_key: :lister_id, dependent: :destroy
-  has_many :listings_proposed_on, through: :proposals, source: :listing
   has_many :proposals, foreign_key: :proposer_id, dependent: :destroy
   has_many :needs, dependent: :destroy
   has_many :needed_seeds, through: :needs, source: :seed
