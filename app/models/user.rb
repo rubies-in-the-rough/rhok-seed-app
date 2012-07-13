@@ -9,15 +9,15 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
+  has_many :listings, foreign_key: :lister_id, dependent: :destroy
+  has_many :listings_proposed_on, through: :proposals, source: :listing
+  has_many :proposals, foreign_key: :proposer_id, dependent: :destroy
+  has_many :needs, dependent: :destroy
+  has_many :needed_seeds, through: :needs, source: :seed
+
   scope :locked, where("locked_at IS NOT NULL")
 
   scope :find_all_like_email, lambda { |email| where('email like ?', email).order('email') }
-
-  has_many :listings, foreign_key: :lister_id
-  has_many :listings_proposed_on, through: :proposals, source: :listing
-  has_many :proposals, foreign_key: :proposer_id
-  has_many :needs, dependent: :destroy
-  has_many :needed_seeds, through: :needs, source: :seed
 
   def needing?(seed)
     needs.find_by_seed_id(seed.id)

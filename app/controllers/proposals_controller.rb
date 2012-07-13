@@ -1,4 +1,7 @@
 class ProposalsController < ApplicationController
+
+  before_filter :authenticate_user!, :except => [:index, :show]
+
   # GET /listings/:listing_id/proposals
   # GET /listings/:listing_id/proposals.json
   def index
@@ -41,6 +44,9 @@ class ProposalsController < ApplicationController
   # POST /listings/:listing_id/proposals.json
   def create
     @proposal = listing.proposals.build(params[:proposal])
+
+    #prolly a better way to do this
+    @proposal.proposer_id = current_user.id
 
     respond_to do |format|
       if @proposal.save
