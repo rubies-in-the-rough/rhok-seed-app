@@ -15,7 +15,7 @@
       <%= f.label :seed_id, class: 'form-label' %>
       <div class="controls">
           <% if @listing.lister.needs.empty? %>
-            <%= f.select :seed_id, Seed.all.collect{|s| [s.common_name, s.id]}, {}, class: 'chosen-select' %>
+            <%= f.select :seed_id, Seed.accepted.collect{|s| [s.common_name, s.id]}, {}, class: 'chosen-select' %>
           <% else %>
             <%= f.select :seed_id, @listing.lister.needs.collect{|n| [n.seed.common_name, n.seed.id]}, {}, class: 'chosen-select' %>
           <% end %>
