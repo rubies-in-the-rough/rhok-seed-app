@@ -10,9 +10,7 @@
   </div>
 <% end %>
 
-<b>Scientific Name:</b> <%= @seed.scientific_name %><br />
-<b>Hardiness Zone:</b> <%= @seed.hardiness_zone %><br />
-<b>Additional Info:</b> <%= @seed.additional_info %><br />
+<%= render :partial => 'seed_info', locals: { seed: @seed } %>
 
 <%= render 'listings' %>
 

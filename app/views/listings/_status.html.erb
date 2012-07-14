@@ -1,0 +1,19 @@
+This listing is 
+<% if @listing.open? %>
+  <span class="label label-success">Open</span>
+<% else %>
+  <span class="label label-important">Closed</span>
+  <% if @listing.lister.id == current_user.id %>
+    <div class="well">
+        You have accepted a proposal! Please contact <%= @listing.accepted_proposal.proposer.email %> to arrange your swap.
+    </div>
+  <% elsif @listing.accepted_proposal.proposer.id == current_user.id %>
+    <div class="well">
+        Your proposal has been accepted! Please contact <%= @listing.lister.email %> to arrange your swap.
+    </div>
+  <% elsif @listing.proposal_users.map{ |u| u.id }.include? current_user.id %>
+    <div class="well">
+        Sorry. Your proposal was not accepted.
+    </div>
+  <% end %>
+<% end %>

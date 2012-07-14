@@ -1,5 +1,3 @@
-<h2>Proposals</h2>
-
 <div class="result-count">
   <p><%= "#{pluralize(proposals.count, "proposal")} found." %></p>
 </div>
@@ -8,8 +6,8 @@
   <thead>
 
     <tr>
-      <th colspan="4">Proposal</th>
-      <th colspan="3">Listing</th>
+      <th colspan="4">Your Proposal</th>
+      <th colspan="4">Listing Proposed On</th>
       <th colspan="1">Remove Proposal</th>
     </tr>
 
@@ -18,12 +16,13 @@
       <th>Strain</th>
       <th>Common Name</th>
       <th>Seed Quantity</th>
-      <th>Created At</th>
+      <th>State</th>
 
       <%#Listing%>
       <th>Strain</th>
       <th>Common Name</th>
       <th>Seed Quantity</th>
+      <th>Proposals</th>
 
       <%#Remove Proposal%>
       <th></th>
@@ -37,15 +36,30 @@
       <td><%= proposal.strain %></td>
       <td><%= proposal.seed.common_name %></td>
       <td><%= proposal.seed_quantity %></td>
-      <td><%= proposal.created_at %></td>
+      <td>
+        <% if proposal.listing.accepted_proposal_id == proposal.id %>
+          <span class="label label-success">Accepted</span>
+        <% elsif proposal.listing.open? %>
+          <span class="label label-warning">Pending</span>
+        <% else %>
+          <span class="label label-important">Not Accepted</span>
+        <% end %>
+      </td>
 
       <%#Listing%>
-      <td><%= proposal.listing.strain %></td>
+      <td><%= link_to proposal.listing.strain, proposal.listing %></td>
       <td><%= proposal.listing.seed.common_name %></td>
       <td><%= proposal.listing.seed_quantity %></td>
+      <td><%= proposal.listing.proposals.count %>
 
       <%#Remove Proposal%>
-      <td><%= button_to 'Remove', listing_proposal_path(proposal.listing, proposal), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+      <td>
+        <% if proposal.listing.accepted_proposal_id == proposal.id %>
+          <%= link_to 'Accepted', "#", class: 'btn disabled' %>
+        <% else %>
+          <%= button_to 'Remove', listing_proposal_path(proposal.listing, proposal), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        <% end %>
+      </td>
     </tr>
   <% end %>
   </tbody>

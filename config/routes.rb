@@ -10,6 +10,7 @@ Rhok::Application.routes.draw do
 
   resources :listings do
     post 'search', to: 'listings#search', as: 'search', on: :collection
+    put 'accept_proposal/:proposal_id', to: 'listings#accept_proposal', as: 'accept_proposal', on: :member
     resources :proposals
   end
 

@@ -1,30 +1,34 @@
 
-<%= link_to 'New Proposal', new_listing_proposal_path(@listing), class: 'btn btn-primary' %>
+<% if @listing.open? and @listing.lister.id != current_user.id %>
+  <%= link_to 'New Proposal', new_listing_proposal_path(@listing), class: 'btn btn-primary' %>
+<% end %>
 
 <br />
-<br />
 
+<div class="result-count">
+  <p><%= "#{pluralize(@listing.proposals.count, "proposals")} found." %></p>
+</div>
 <table class="table table-bordered table-striped">
   <tr>
     <th>Strain</th>
     <th>Seed</th>
     <th>Seed quantity</th>
-    <% if current_user.id == listing.lister.id %>
-      <th></th>
-      <th></th>
+    <% if current_user.id == listing.lister.id && listing.open?  %>
       <th></th>
     <% end %>
   </tr>
 
 <% proposals.each do |proposal| %>
-  <tr>
+  <% if proposal.id == listing.accepted_proposal_id %>
+    <tr id="accepted-proposal">
+  <% else %>
+    <tr>
+  <% end %>
     <td><%= proposal.strain %></td>
     <td><%= proposal.seed.common_name %></td>
     <td><%= proposal.seed_quantity %></td>
-    <% if current_user.id == listing.lister.id %>
-      <td><%= link_to "Show".html_safe, listing_proposal_path(@listing, proposal), class: 'btn btn-mini btn-success' %></td>
-      <td><%= link_to 'Edit', edit_listing_proposal_path(@listing, proposal), class: 'btn btn-mini' %></td>
-      <td><%= link_to 'Destroy', listing_proposal_path(@listing, proposal), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-mini btn-danger' %></td>
+    <% if current_user.id == listing.lister.id && listing.open? %>
+      <td><%= button_to "Accept Proposal".html_safe, accept_proposal_listing_path(@listing, proposal), method: :put, class: 'btn btn-mini btn-success' %></td>
     <% end %>
   </tr>
 <% end %>

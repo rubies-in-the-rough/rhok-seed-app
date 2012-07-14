@@ -1,24 +1,5 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Listing:</b>
-  <%= @proposal.listing_id %>
-</p>
-
-<p>
-  <b>Seed:</b>
-  <%= @proposal.seed_id %>
-</p>
-
-<p>
-  <b>Seed quantity:</b>
-  <%= @proposal.seed_quantity %>
-</p>
-
-<p>
-  <b>Strain:</b>
-  <%= @proposal.strain %>
-</p>
+<h1>Proposal of <%= @proposal.strain %></h1>
+<%= render :partial => 'proposal_info', locals: { proposal: @proposal, listing: @listing } %>
 
 
 <%= link_to 'Edit', edit_listing_proposal_path(@listing, @proposal) %> |
