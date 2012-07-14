@@ -1,0 +1,9 @@
+<% if proposal.listing_open? %>
+  <span class="label label-warning">Pending</span>
+<% else %>
+  <% if proposal.accepted? %>
+    <span class="label label-success">Accepted</span>
+  <% else %>
+    <span class="label label-important">Not Accepted</span>
+  <% end %>
+<% end %>

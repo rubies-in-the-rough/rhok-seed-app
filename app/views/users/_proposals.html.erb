@@ -37,13 +37,7 @@
       <td><%= proposal.seed.common_name %></td>
       <td><%= proposal.seed_quantity %></td>
       <td>
-        <% if proposal.listing.accepted_proposal_id == proposal.id %>
-          <span class="label label-success">Accepted</span>
-        <% elsif proposal.listing.open? %>
-          <span class="label label-warning">Pending</span>
-        <% else %>
-          <span class="label label-important">Not Accepted</span>
-        <% end %>
+        <%= render :partial => 'proposals/status', locals: { proposal: proposal } %>
       </td>
 
       <%#Listing%>

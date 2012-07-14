@@ -1,4 +1,9 @@
 <p>
+  <b>Status:</b>
+  <%= render :partial => 'proposals/status', locals: { proposal: proposal } %>
+</p>
+
+<p>
   <b>Strain:</b>
   <%= proposal.strain %>
 </p>

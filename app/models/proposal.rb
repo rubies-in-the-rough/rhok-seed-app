@@ -41,6 +41,14 @@ class Proposal < ActiveRecord::Base
     end
   end
 
+  def accepted?
+    return listing.accepted_proposal_id == id
+  end
+
+  def listing_open?
+    return listing.open?
+  end
+
   protected #dont violate object encapsulation
 
   def disallow_if_accepted_proposal

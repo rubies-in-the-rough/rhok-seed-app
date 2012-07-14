@@ -14,7 +14,9 @@
     <th>Seed</th>
     <th>Seed quantity</th>
     <% if current_user.id == listing.lister.id && listing.open?  %>
-      <th></th>
+      <th>Accept?</th>
+    <% else %>
+      <th>Status</th>
     <% end %>
   </tr>
 
@@ -29,6 +31,8 @@
     <td><%= proposal.seed_quantity %></td>
     <% if current_user.id == listing.lister.id && listing.open? %>
       <td><%= button_to "Accept Proposal".html_safe, accept_proposal_listing_path(@listing, proposal), method: :put, class: 'btn btn-mini btn-success' %></td>
+    <% else %>
+      <td><%= render :partial => 'proposals/status', locals: { proposal: proposal } %></td>
     <% end %>
   </tr>
 <% end %>
