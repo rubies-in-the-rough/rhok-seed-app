@@ -1,8 +1,26 @@
 class Seed < ActiveRecord::Base
   attr_accessible :accepted, :common_name, :hardiness_zone, :scientific_name, :additional_info
 
-  has_many :listings
-  has_many :proposals
+  has_many :listings, dependent: :destroy
+  has_many :proposals, dependent: :destroy
+
+  validates :common_name,
+            presence: true,
+            length: { minimum: 2 },
+            uniqueness: { case_sensitive: false }
+
+  validates :scientific_name,
+            presence: true,
+            length: { minimum: 2 },
+            uniqueness: { case_sensitive: false }
+
+  validates :hardiness_zone,
+            presence: true,
+            numericality: { only_integer: true }
+
+  validates :accepted,
+            presence: true,
+            inclusion: { in: [true, false] }
 
   scope :accepted, where(:accepted => true)
   scope :unaccepted, where(:accepted => false)

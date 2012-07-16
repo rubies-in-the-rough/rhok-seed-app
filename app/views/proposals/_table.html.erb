@@ -1,0 +1,40 @@
+
+<% if @listing.open? and @listing.lister.id != current_user.id %>
+  <%= link_to 'New Proposal', new_listing_proposal_path(@listing), class: 'btn btn-primary' %>
+<% end %>
+
+<br />
+
+<div class="result-count">
+  <p><%= "#{pluralize(@listing.proposals.count, "proposals")} found." %></p>
+</div>
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>Strain</th>
+    <th>Seed</th>
+    <th>Seed quantity</th>
+    <% if current_user.id == listing.lister.id && listing.open?  %>
+      <th>Accept?</th>
+    <% else %>
+      <th>Status</th>
+    <% end %>
+  </tr>
+
+<% proposals.each do |proposal| %>
+  <% if proposal.id == listing.accepted_proposal_id %>
+    <tr id="accepted-proposal">
+  <% else %>
+    <tr>
+  <% end %>
+    <td><%= proposal.strain %></td>
+    <td><%= proposal.seed.common_name %></td>
+    <td><%= proposal.seed_quantity %></td>
+    <% if current_user.id == listing.lister.id && listing.open? %>
+      <td><%= button_to "Accept Proposal".html_safe, accept_proposal_listing_path(@listing, proposal), method: :put, class: 'btn btn-mini btn-success' %></td>
+    <% else %>
+      <td><%= render :partial => 'proposals/status', locals: { proposal: proposal } %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+

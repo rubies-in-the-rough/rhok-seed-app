@@ -1,4 +1,7 @@
 class ProposalsController < ApplicationController
+
+  before_filter :authenticate_user!, :except => [:index, :show]
+
   # GET /listings/:listing_id/proposals
   # GET /listings/:listing_id/proposals.json
   def index
@@ -42,6 +45,9 @@ class ProposalsController < ApplicationController
   def create
     @proposal = listing.proposals.build(params[:proposal])
 
+    #prolly a better way to do this
+    @proposal.proposer_id = current_user.id
+
     respond_to do |format|
       if @proposal.save
         format.html { redirect_to listing_proposal_url(@listing, @proposal), notice: 'Proposal was successfully created.' }
@@ -73,15 +79,22 @@ class ProposalsController < ApplicationController
   # DELETE /listings/:listing_id/proposals/1.json
   def destroy
     @proposal = listing.proposals.find(params[:id])
-    @proposal.destroy
+
 
     respond_to do |format|
-      format.html { redirect_to listing_proposals_url(@listing) }
-      format.json { head :no_content }
+      if @proposal.id == @proposal.listing.accepted_proposal_id
+        format.html { redirect_to listing_proposals_url(@listing), error: "You can't remove an accepted proposal." }
+        format.json { head :no_content }
+      else
+        @proposal.destroy
+        format.html { redirect_to listing_proposals_url(@listing) }
+        format.json { head :no_content }
+      end
     end
   end
 
   def listing
     @listing = Listing.find(params[:listing_id])
   end
+
 end

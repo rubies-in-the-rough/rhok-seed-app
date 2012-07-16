@@ -1,7 +1,9 @@
 <h1><%= @user[:email] %></h1>
 
-<%= render :partial => 'listings', locals: {user: @user} %>
+<h2>Listings</h2>
+<%= render :partial => 'listings', locals: {user: @user, listings: @user.listings} %>
 
 <% if current_user == @user %>
-  <%= render :partial => 'listings_proposed_on', locals: { proposals: @user.listings_proposed_on } %>
+  <h2>Proposals</h2>
+  <%= render :partial => 'proposals', locals: { proposals: @user.proposals } %>
 <% end %>

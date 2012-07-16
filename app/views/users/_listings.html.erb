@@ -1,5 +1,3 @@
-<h2>Listings</h2>
-
 <div class="result-count">
   <p><%= "#{pluralize(user.listings.count, "listing")} found." %></p>
 </div>
@@ -7,12 +5,13 @@
 <table class="table table-striped table-bordered">
   <thead>
     <tr>
-      <th>Listing</th>
+      <th>Your Listing</th>
       <th>Common Name</th>
       <th>Seed Quantity</th>
-      <th>Created At</th>
+      <th>Proposals</th>
+      <th>State</th>
       <% if @user == current_user %>
-        <th>Remove</th>
+        <th>Remove Listing</th>
       <% end %>
     </tr>
   </thead>
@@ -23,7 +22,15 @@
       <td><%= link_to l[:strain], listing_path(l) %></td>
       <td><%= l.seed.common_name %></td>
       <td><%= l.seed_quantity %></td>
-      <td><%= l.created_at %></td>
+      <td><%= l.proposals.count %></td>
+      <td>
+        <% if l.open? %>
+          <span class="label label-success">Open</span>
+        <% else %>
+          <span class="label label-important">Closed</span>
+        <% end %>
+      </td>
+
       <% if @user == current_user %>
         <td>
           <%= form_for(l, html: { method: :delete }) do |f| %>

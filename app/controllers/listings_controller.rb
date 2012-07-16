@@ -5,7 +5,7 @@ class ListingsController < ApplicationController
   # GET /listings
   # GET /listings.json
   def index
-    @listings = Listing.all
+    @listings = Listing.open
 
     respond_to do |format|
       format.html # index.html.erb
@@ -88,6 +88,14 @@ class ListingsController < ApplicationController
 
   def search
     @query = "%#{params[:query]}%" #escape that shit from sql injections
-    @listings_of_strain = Listing.find_all_like_strain(@query)
+    @listings_of_strain = Listing.open.find_all_like_strain(@query) #only search on open listings
   end
+
+  def accept_proposal
+    listing = Listing.find(params[:id])
+    #proposal = Proposal.find(params[:proposal_id])
+    listing.update_attributes!(accepted_proposal_id: params[:proposal_id])
+    redirect_to listing
+  end
+
 end

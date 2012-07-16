@@ -13,7 +13,7 @@
   <div class="control-group">
     <%= f.label :seed, class: 'control-label' %>
     <div class="controls">
-      <%= f.select :seed_id, Seed.all.collect {|s| [s.common_name, s.id]}, {}, 'data-placeholder' => "Choose a Seed", class: 'chosen-select' %>
+      <%= f.select :seed_id, Seed.accepted.collect {|s| [s.common_name, s.id]}, {}, 'data-placeholder' => "Choose a Seed", class: 'chosen-select' %>
     </div>
     
   </div>

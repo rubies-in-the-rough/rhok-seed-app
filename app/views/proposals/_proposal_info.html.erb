@@ -1,0 +1,27 @@
+<p>
+  <b>Status:</b>
+  <%= render :partial => 'proposals/status', locals: { proposal: proposal } %>
+</p>
+
+<p>
+  <b>Strain:</b>
+  <%= proposal.strain %>
+</p>
+
+<p>
+  <b>Seed:</b>
+  <%= proposal.seed.common_name %>
+</p>
+
+
+<p>
+  <b>Seed quantity:</b>
+  <%= proposal.seed_quantity %>
+</p>
+
+<p>
+  <b>Listing Proposed On:</b>
+  <div class="well">
+    <%= render :partial => 'listings/listing_info', locals: { listing: listing } %>
+  </div>
+</p>

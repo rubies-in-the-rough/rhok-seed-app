@@ -1,29 +1,3 @@
 <h1>Listing proposals</h1>
 
-<table class="table table-bordered table-striped">
-  <tr>
-    <th>Listing</th>
-    <th>Seed</th>
-    <th>Seed quantity</th>
-    <th>Strain</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @proposals.each do |proposal| %>
-  <tr>
-    <td><%= proposal.listing_id %></td>
-    <td><%= proposal.seed_id %></td>
-    <td><%= proposal.seed_quantity %></td>
-    <td><%= proposal.strain %></td>
-    <td><%= link_to "Show".html_safe, listing_proposal_path(@listing, proposal), class: 'btn btn-mini btn-success' %></td>
-    <td><%= link_to 'Edit', edit_listing_proposal_path(@listing, proposal), class: 'btn btn-mini' %></td>
-    <td><%= link_to 'Destroy', listing_proposal_path(@listing, proposal), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-mini btn-danger' %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Proposal', new_listing_proposal_path(@listing), class: 'btn btn-primary' %>
+<%= render :partial => 'table', locals: { listing: @listing, proposals: @proposals } %>
