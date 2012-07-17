@@ -8,7 +8,10 @@
   <thead>
     <tr>
       <% columns.each do |column| %>
-        <th><%= column.to_s.titleize %></th>
+        <% if !current_user and column == :add_to_needs %>
+        <% else %>
+          <th><%= column.to_s.titleize %></th>
+        <% end %>
       <% end %>
     </tr>
   </thead>
@@ -19,18 +22,21 @@
         <% if column == :listings %>
           <td><%= link_to "#{seed.listings.count} listing".pluralize(seed.listings.count), seed %></td>
         <% elsif column == :add_to_needs %>
-          <td>
-            <center>
-              <% if not current_user.needing?(seed) %>
-                <%= form_for(current_user.needs.build(seed_id: seed.id)) do |f| %>
-                  <div><%= f.hidden_field :seed_id %></div>
-                  <%= f.submit "Add this to my needs", class: "btn btn-success" %>
+          <% if current_user %>
+            <td>
+              <center>
+                <% if not current_user.needing?(seed) %>
+                  <%= form_for(current_user.needs.build(seed_id: seed.id)) do |f| %>
+                    <div><%= f.hidden_field :seed_id %></div>
+                    <%= f.submit "Add this to my needs", class: "btn btn-success" %>
+                  <% end %>
+                <% else %>
+                  <a href="#" class="btn disabled">Already needed</a>
                 <% end %>
-              <% else %>
-                <a href="#" class="btn disabled">Already needed</a>
-              <% end %>
-           </center>
-          </td>
+             </center>
+            </td>
+          <% else %>
+          <% end %>
         <% else %>
           <td><%= seed.send(column.to_sym) %></td>
         <% end %>
