@@ -20,11 +20,6 @@ class Seed < ActiveRecord::Base
   validates :hardiness_zone,
             presence: true,
             numericality: { only_integer: true }
-
-  validates :accepted,
-            presence: true,
-            inclusion: { in: [true, false] }
-
   #class specific query scopes
   scope :accepted, where(:accepted => true)
   scope :unaccepted, where(:accepted => false)
