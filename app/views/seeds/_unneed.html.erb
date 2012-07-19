@@ -1,4 +1,4 @@
-<%= form_for(current_user.needs.find_by_seed_id(@seed),
+<%= form_for(current_user.needs.find_by_seed_id(seed),
              html: { method: :delete }) do |f| %>
   <%= f.submit "Remove from my needs", class: "btn btn-danger" %>
 <% end %>

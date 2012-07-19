@@ -15,13 +15,12 @@
       <tr>
         <td><%= needed_seed.common_name %></td>
         <td><%= needed_seed.scientific_name %></td>
-        <%#TODO: figure out how to render seeds/unneed partial here instead%>
         <td>
-          <%#<%= render 'seeds/unneed', locals: { :seed => needed_seed }  or something%>
-          <%= form_for(current_user.needs.find_by_seed_id(needed_seed),
-                       html: { method: :delete }) do |f| %>
-            <%= f.submit "Remove", class: "btn btn-danger" %>
-          <% end %>
+          <%= render partial: 'seeds/unneed', locals: { seed: needed_seed } %>
+          <%#<%= form_for(current_user.needs.find_by_seed_id(needed_seed),%>
+                       <%#html: { method: :delete }) do |f| %>
+            <%#<%= f.submit "Remove", class: "btn btn-danger" %>
+          <%#<% end %>
         </td>
 
       </tr>

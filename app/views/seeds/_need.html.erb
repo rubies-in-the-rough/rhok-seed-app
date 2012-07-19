@@ -1,4 +1,4 @@
-<%= form_for(current_user.needs.build(seed_id: @seed.id)) do |f| %>
+<%= form_for(current_user.needs.build(seed_id: seed.id)) do |f| %>
   <div><%= f.hidden_field :seed_id %></div>
   <%= f.submit "Add this to my needs", class: "btn btn-success" %>
 <% end %>
