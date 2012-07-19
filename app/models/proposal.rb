@@ -1,10 +1,13 @@
 class Proposal < ActiveRecord::Base
+  #whitelist attributes for mass-assignment
   attr_accessible :listing_id, :seed_id, :proposer_id, :seed_quantity, :strain
 
+  #define relationships
   belongs_to :listing
   belongs_to :seed
   belongs_to :proposer, :class_name => "User"
 
+  #attribute validations
   validates_associated :proposer
   validates :proposer_id,
             presence: true
@@ -41,16 +44,30 @@ class Proposal < ActiveRecord::Base
     end
   end
 
+  #
+  # Check if a proposal has been accepted.
+  #
+  # @return boolean - true if proposal was chosen for a listing
+  #
   def accepted?
     return listing.accepted_proposal_id == id
   end
 
+  #
+  # Check if the proposal's listing is unclaimed.
+  #
+  # @return boolean - true if the listing is unclaimed
+  #
   def listing_open?
     return listing.open?
   end
 
   protected #dont violate object encapsulation
 
+  #
+  # Prevent the destruction of an accepted proposal
+  #  for record keeping purposes
+  #
   def disallow_if_accepted_proposal
     if listing.accepted_proposal and listing.accepted_proposal.id == id
       errors.add(:base, "You can't remove an accepted proposal.") 

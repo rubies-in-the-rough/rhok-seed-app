@@ -1,9 +1,12 @@
 class Seed < ActiveRecord::Base
+  #whitelist attributes for mass-assignment
   attr_accessible :accepted, :common_name, :hardiness_zone, :scientific_name, :additional_info
 
+  #define relationships
   has_many :listings, dependent: :destroy
   has_many :proposals, dependent: :destroy
 
+  #attribute validations
   validates :common_name,
             presence: true,
             length: { minimum: 2 },
@@ -22,6 +25,7 @@ class Seed < ActiveRecord::Base
             presence: true,
             inclusion: { in: [true, false] }
 
+  #class specific query scopes
   scope :accepted, where(:accepted => true)
   scope :unaccepted, where(:accepted => false)
 
