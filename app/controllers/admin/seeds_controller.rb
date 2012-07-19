@@ -1,5 +1,7 @@
 class Admin::SeedsController < Admin::AdminController
+  # only index the seeds pending approval
   def index
+    #use dat scope
     @pending_seeds = Seed.unaccepted
   end
 
@@ -7,22 +9,26 @@ class Admin::SeedsController < Admin::AdminController
   def accept
     @seed_to_accept = Seed.find(params[:id])
 
+    #set accepted to true, which means a seed will now be in the seed#index
     @seed_to_accept.update_attribute(:accepted, true)
 
-    #flash[:notice] = "Accepted seed #{@seed_to_accept.common_name}."
+    #In the flash, put a link to the seed/show view that you just created
     flash[:notice] = "Accepted seed <a href=\"#{url_for(@seed_to_accept)}\">#{@seed_to_accept.common_name}</a>.".html_safe
-    #redirect_to seed_path(params[:id]) #back to seed (not admin)
-    redirect_to admin_seeds_path #back to index
+    #back to index if admin wants to keep accepting/rejecting
+    redirect_to admin_seeds_path
   end
 
   # reject a seed
   def destroy
     @seed_to_reject = Seed.find(params[:id])
 
+    #no need to keep a seed around that we don't like.
+    #get rid of it from the db
     @seed_to_reject.destroy
 
     flash[:notice] = "Rejected seed #{@seed_to_reject.common_name}."
-    redirect_to admin_seeds_path #back to index
+    #back to index if admin wants to keep accepting/rejecting
+    redirect_to admin_seeds_path
   end
 
 end

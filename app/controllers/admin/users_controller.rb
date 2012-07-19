@@ -1,15 +1,17 @@
 class Admin::UsersController < Admin::AdminController
+  #only show the locked users
   def show_locked
     @locked_users = User.locked 
   end
 
+  #perform an unlock
   def unlock
     @user_to_unlock = User.find(params[:id])
 
     if @user_to_unlock
+      #use model method to take care of the details of this
       @user_to_unlock.unlock_access!
 
-      # TODO: the interpolation here isn't working
       flash[:notice] = "User #{@user_to_unlock.email} has been unlocked"
     end
 

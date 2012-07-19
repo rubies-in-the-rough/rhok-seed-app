@@ -1,9 +1,9 @@
 class ProposalsController < ApplicationController
 
+  #allow unlogged in users to index and show
   before_filter :authenticate_user!, :except => [:index, :show]
 
-  # GET /listings/:listing_id/proposals
-  # GET /listings/:listing_id/proposals.json
+  # index all the proposals for a listing
   def index
     @proposals = listing.proposals
 
@@ -13,8 +13,7 @@ class ProposalsController < ApplicationController
     end
   end
 
-  # GET /listings/:listing_id/proposals/1
-  # GET /listings/:listing_id/proposals/1.json
+  # show a proposal
   def show
     @proposal = listing.proposals.find(params[:id])
 
@@ -24,8 +23,7 @@ class ProposalsController < ApplicationController
     end
   end
 
-  # GET /listings/:listing_id/proposals/new
-  # GET /listings/:listing_id/proposals/new.json
+  # create a new proposal so that we may generate a form for it
   def new
     @proposal = listing.proposals.build
 
@@ -35,13 +33,12 @@ class ProposalsController < ApplicationController
     end
   end
 
-  # GET /listings/:listing_id/proposals/1/edit
+  # find a proposal so that we may generate a form for it
   def edit
     @proposal = listing.proposals.find(params[:id])
   end
 
-  # POST /listings/:listing_id/proposals
-  # POST /listings/:listing_id/proposals.json
+  # create a new listing from post params
   def create
     @proposal = listing.proposals.build(params[:proposal])
 
@@ -59,8 +56,7 @@ class ProposalsController < ApplicationController
     end
   end
 
-  # PUT /listings/:listing_id/proposals/1
-  # PUT /listings/:listing_id/proposals/1.json
+  #update a proposal with post params
   def update
     @proposal = listing.proposals.find(params[:id])
 
@@ -75,8 +71,7 @@ class ProposalsController < ApplicationController
     end
   end
 
-  # DELETE /listings/:listing_id/proposals/1
-  # DELETE /listings/:listing_id/proposals/1.json
+  # destroy a proposal by id
   def destroy
     @proposal = listing.proposals.find(params[:id])
 
@@ -93,6 +88,7 @@ class ProposalsController < ApplicationController
     end
   end
 
+  #return the listing associated with proposal
   def listing
     @listing = Listing.find(params[:listing_id])
   end

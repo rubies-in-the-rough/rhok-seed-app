@@ -1,9 +1,10 @@
 class ListingsController < ApplicationController
 
+  #allow unlogged in users to index and show
   before_filter :authenticate_user!, :except => [:index, :show]
 
-  # GET /listings
-  # GET /listings.json
+  #index only listings that are open
+  #users shouldn't be shown listings that are closed (already accepted proposal)
   def index
     @listings = Listing.open
 
@@ -13,8 +14,7 @@ class ListingsController < ApplicationController
     end
   end
 
-  # GET /listings/1
-  # GET /listings/1.json
+  #show a listing
   def show
     @listing = Listing.find(params[:id])
 
@@ -24,8 +24,7 @@ class ListingsController < ApplicationController
     end
   end
 
-  # GET /listings/new
-  # GET /listings/new.json
+  # create a new listing so that we may generate a form for it
   def new
     @listing = Listing.new
 
@@ -35,13 +34,12 @@ class ListingsController < ApplicationController
     end
   end
 
-  # GET /listings/1/edit
+  # find a current listing so that we may generate a form for it
   def edit
     @listing = Listing.find(params[:id])
   end
 
-  # POST /listings
-  # POST /listings.json
+  # use post parameters to make a new listing
   def create
     @listing = Listing.new(params[:listing])
     @listing.lister = current_user
@@ -58,8 +56,7 @@ class ListingsController < ApplicationController
     end
   end
 
-  # PUT /listings/1
-  # PUT /listings/1.json
+  #find a listing by id an update it with post params
   def update
     @listing = Listing.find(params[:id])
 
@@ -74,8 +71,7 @@ class ListingsController < ApplicationController
     end
   end
 
-  # DELETE /listings/1
-  # DELETE /listings/1.json
+  # destroy a listing (found by id) from the database
   def destroy
     @listing = Listing.find(params[:id])
     @listing.destroy
@@ -86,14 +82,15 @@ class ListingsController < ApplicationController
     end
   end
 
+  # perform a search on listings from a user's search query
   def search
     @query = "%#{params[:query]}%" #escape that shit from sql injections
     @listings_of_strain = Listing.open.find_all_like_strain(@query) #only search on open listings
   end
 
+  # attach a proposal to a listing as the accepted_proposal
   def accept_proposal
     listing = Listing.find(params[:id])
-    #proposal = Proposal.find(params[:proposal_id])
     listing.update_attributes!(accepted_proposal_id: params[:proposal_id])
     redirect_to listing
   end
