@@ -1,11 +1,13 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 
   #GET /users/sign_up
+  # Render the registration form
   def new
     self.resource = User.new_with_session({}, session)
   end
 
   #POST /users/sign_up
+  # Create a new user entry and log the user in
   def create
     user = build_resource
 
@@ -20,11 +22,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # GET /users/edit
+  # Render the account edit form
   def edit
     render :edit
   end
 
   # PUT /users
+  # Update the user entry with incoming attributes
   def update
     user = self.resource = User.to_adapter.get!(send(:"current_user").to_key)
 
