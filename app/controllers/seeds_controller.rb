@@ -2,14 +2,20 @@ class SeedsController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:index, :show]
 
+  # GET /seeds
+  # Show all approved seeds
   def index
     @seeds = Seed.accepted
   end
 
+  # GET /seeds/new
+  # Render the form to propose a new seed 
   def new
     @seed = Seed.new
   end
 
+  # POST /seeds
+  # Create a new seed pending approval of admin
   def create
     @seed = Seed.new(params[:seed])
     @seed.accepted = false #always set this to false
@@ -27,6 +33,8 @@ class SeedsController < ApplicationController
     end
   end
 
+  # GET /seeds/:id
+  # Render a specific seed's profile
   def show
     @seed = Seed.find(params[:id])
 
@@ -38,6 +46,8 @@ class SeedsController < ApplicationController
     @listings = Listing.find(:all, :conditions => {:seed_id => @seed})
   end
 
+  # POST /seeds/search
+  # Render the amalgamated search results for a seed query
   def search
       @query = "%#{params[:query]}%" #escape that shit from sql injections
       @seeds_of_common_name = Seed.find_all_like_common_name(@query)
