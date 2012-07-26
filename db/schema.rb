@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120709205756) do
+ActiveRecord::Schema.define(:version => 20120726195113) do
 
   create_table "listings", :force => true do |t|
     t.string   "strain"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(:version => 20120709205756) do
     t.string   "common_name"
     t.string   "scientific_name"
     t.boolean  "accepted",        :default => false
-    t.integer  "hardiness_zone"
+    t.string   "hardiness_zone"
     t.text     "additional_info", :default => "None."
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
