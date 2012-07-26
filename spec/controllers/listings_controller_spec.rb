@@ -24,19 +24,27 @@ describe ListingsController do
   # Listing. As you add validations to Listing, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {
+
+    }
   end
   
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # ListingsController. Be sure to keep this updated too.
   def valid_session
-    {}
+    {
+
+    }
+  end
+
+  before(:all) do
+    sign_in FactoryGirl.create(:user)
   end
 
   describe "GET index" do
     it "assigns all listings as @listings" do
-      listing = Listing.create! valid_attributes
+      listing = FactoryGirl.create :listing 
       get :index, {}, valid_session
       assigns(:listings).should eq([listing])
     end
@@ -44,7 +52,7 @@ describe ListingsController do
 
   describe "GET show" do
     it "assigns the requested listing as @listing" do
-      listing = Listing.create! valid_attributes
+      listing = FactoryGirl.create :listing
       get :show, {:id => listing.to_param}, valid_session
       assigns(:listing).should eq(listing)
     end
@@ -59,7 +67,7 @@ describe ListingsController do
 
   describe "GET edit" do
     it "assigns the requested listing as @listing" do
-      listing = Listing.create! valid_attributes
+      listing = FactoryGirl.create :listing
       get :edit, {:id => listing.to_param}, valid_session
       assigns(:listing).should eq(listing)
     end
@@ -105,7 +113,7 @@ describe ListingsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested listing" do
-        listing = Listing.create! valid_attributes
+        listing = FactoryGirl.create :listing
         # Assuming there are no other listings in the database, this
         # specifies that the Listing created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -115,13 +123,13 @@ describe ListingsController do
       end
 
       it "assigns the requested listing as @listing" do
-        listing = Listing.create! valid_attributes
+        listing = FactoryGirl.create :listing
         put :update, {:id => listing.to_param, :listing => valid_attributes}, valid_session
         assigns(:listing).should eq(listing)
       end
 
       it "redirects to the listing" do
-        listing = Listing.create! valid_attributes
+        listing = FactoryGirl.create :listing
         put :update, {:id => listing.to_param, :listing => valid_attributes}, valid_session
         response.should redirect_to(listing)
       end
@@ -129,7 +137,7 @@ describe ListingsController do
 
     describe "with invalid params" do
       it "assigns the listing as @listing" do
-        listing = Listing.create! valid_attributes
+        listing = FactoryGirl.create :listing
         # Trigger the behavior that occurs when invalid params are submitted
         Listing.any_instance.stub(:save).and_return(false)
         put :update, {:id => listing.to_param, :listing => {}}, valid_session
@@ -137,7 +145,7 @@ describe ListingsController do
       end
 
       it "re-renders the 'edit' template" do
-        listing = Listing.create! valid_attributes
+        listing = FactoryGirl.create :listing
         # Trigger the behavior that occurs when invalid params are submitted
         Listing.any_instance.stub(:save).and_return(false)
         put :update, {:id => listing.to_param, :listing => {}}, valid_session
@@ -148,14 +156,14 @@ describe ListingsController do
 
   describe "DELETE destroy" do
     it "destroys the requested listing" do
-      listing = Listing.create! valid_attributes
+      listing = FactoryGirl.create :listing
       expect {
         delete :destroy, {:id => listing.to_param}, valid_session
       }.to change(Listing, :count).by(-1)
     end
 
     it "redirects to the listings list" do
-      listing = Listing.create! valid_attributes
+      listing = FactoryGirl.create :listing
       delete :destroy, {:id => listing.to_param}, valid_session
       response.should redirect_to(listings_url)
     end

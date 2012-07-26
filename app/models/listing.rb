@@ -5,7 +5,7 @@ class Listing < ActiveRecord::Base
   #define relationships
   has_one :accepted_proposal, :class_name => "Proposal"
   has_many :proposals, :class_name => 'Proposal', dependent: :destroy
-  has_many :proposal_users, through: :proposals, source: :user
+  has_many :proposal_users, through: :proposals, source: :proposer
   belongs_to :lister, :class_name => "User"
   belongs_to :seed
 
