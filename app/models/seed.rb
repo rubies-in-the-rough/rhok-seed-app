@@ -18,8 +18,8 @@ class Seed < ActiveRecord::Base
             uniqueness: { case_sensitive: false }
 
   validates :hardiness_zone,
-            presence: true,
-            numericality: { only_integer: true }
+            presence: true
+
   #class specific query scopes
   scope :accepted, where(:accepted => true)
   scope :unaccepted, where(:accepted => false)

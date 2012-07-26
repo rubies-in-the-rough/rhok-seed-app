@@ -1,7 +1,7 @@
 class ListingsController < ApplicationController
 
   #allow unlogged in users to index and show
-  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:index, :show, :search]
 
   #index only listings that are open
   #users shouldn't be shown listings that are closed (already accepted proposal)
