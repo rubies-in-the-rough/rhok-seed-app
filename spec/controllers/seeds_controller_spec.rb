@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SeedController do
+describe SeedsController do
 
   describe "GET 'index'" do
     it "returns http success" do
