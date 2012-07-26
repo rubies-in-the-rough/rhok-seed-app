@@ -7,6 +7,10 @@ describe Listing do
     @listing = FactoryGirl.create(:listing)
   end
 
+  after(:all) do
+    @listing.destroy
+  end
+
   describe "attributes" do
     it "#description" do
       @listing.should respond_to(:description)
@@ -33,8 +37,32 @@ describe Listing do
     end
     it "has one accepted proposal" do
       @listing.should respond_to(:accepted_proposal)
-      @listing.accepted_proposal = FactoryGirl.create(:proposal)
-      @listing.accepted_proposal.should be_a(Proposal)
     end
   end
+
+  describe "instance methods" do
+    it "#open? - checks if the listing has been claimed" do
+      @listing.should respond_to(:open?)
+      @listing.open?.should be_true
+    end
+  end
+
+  describe "class methods" do
+    it "#find_all_like_strain" do
+      listings = Listing.find_all_like_strain(@listing.strain)
+      listings.should_not be_nil
+      listings.first.id.should be(@listing.id)
+    end
+    it "#open find all open/unclaimed listings" do
+      listings = Listing.open
+      listings.should_not be_nil
+      listings.first.id.should be(@listing.id)
+    end
+    it "#closed find all closed/claimed listings" do
+      listings = Listing.closed
+      listings.should_not be_nil
+      listings.should be_empty
+    end
+  end
+
 end

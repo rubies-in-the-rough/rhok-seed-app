@@ -8,8 +8,8 @@ FactoryGirl.define do
   end
 
   factory :seed do
-    common_name "Corn"
-    scientific_name "Zea Mays"
+    sequence(:common_name) {|n| "Corn#{n}" }
+    sequence(:scientific_name) {|n| "ZeaMays#{n}" }
     hardiness_zone "4"
     additional_info "Tastey shit"
     accepted true
